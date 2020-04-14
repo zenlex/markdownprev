@@ -1,6 +1,6 @@
 import React from 'react';
 import './Markdown.css';
-import {createStore} from 'redux'
+
 import marked from 'marked'
 import DOMPurify from 'dompurify'
 import {connect} from 'react-redux'
@@ -16,33 +16,35 @@ const UPDATE_EDIT = 'UPDATE_EDIT';
 function updateEdit (text){
   return{
     type:UPDATE_EDIT,
-    payload:text
+    rawtxt:text,
+    markdown: parseMd(text)
   }
 }
 
 //basic function for converting rawtxt to sanitized markdown
-const parseMd = (rawtxt) => {
- 
-  var parsed = marked(rawtxt)
+const parseMd = (data) => {
+  var parsed = marked(data)
+    //console.log(`Parsed rawtxt ${rawtxt} to ${parsed}`)
   var clean = DOMPurify.sanitize(parsed)  
+    //console.log(`Sanitized HTML Result: ${clean}`)
+    return clean;
   
-  return clean;
 }
 
 //create reducer function
-const DEFAULT_EDITOR = '';
+const DEFAULT_EDITOR = 'bloopy';
 const DEFAULT_MD = parseMd(DEFAULT_EDITOR);
-
 const initialState = {
   rawtxt: DEFAULT_EDITOR,
   markdown: DEFAULT_MD
 }
 
-function markDownPrev(state = initialState, action){
+export function mdReducer(state = initialState, action){
   //simply maps input text to both fields in state (see notes on REDUX section above)
+    console.log(`Calling MarkDownPrev reducer with action type= ${action.type}`)
     switch (action.type){
       case UPDATE_EDIT:
-        return Object.assign({}, state, {editortxt: action.payload})
+        return Object.assign({}, state, {rawtxt:action.rawtxt, markdown:action.markdown})
       default: 
         return state
     }
@@ -59,18 +61,16 @@ function markDownPrev(state = initialState, action){
  ***************************************/
 
  //Editor is a text area (id= 'editor') whose props are simply the value of the user input
-  const Editor = props => (
+ export const Editor = ({onChange}) => (
     <div className = 'wrapper'>
       <h1>Editor:</h1>
-      <textarea id = 'editor' value = {props.rawtxt} />
+      <textarea id = 'editor' onChange={onChange} />
     </div>
   )
  
- 
- 
  //Previewer is a container div (id = 'preview') which contains resulting markdown->HTML
-  const Previewer = props => (
-    <div className = 'wrapper'>
+ export const Previewer = props => (
+     <div className = 'wrapper'>
       <h1>Markdown:</h1>
       <div id = 'preview'>
         {props.markdown}
@@ -78,30 +78,17 @@ function markDownPrev(state = initialState, action){
     </div>
   )
 
- //Container component - Holds both Editor and previewer, catches changes and triggers store then passes new state to Preview
+const mapStateToProps = state =>{
+  return{
+    markdown: state.markdown
+  };
+}
 
-
-  const mapStateToProps = state => {
-    return{
-      markdown: parseMd(state.rawtxt)
-    }
+const mapDispatchToProps = dispatch => {
+  return{
+    onChange: text => dispatch(updateEdit(text))
   }
+}
 
-  const mapDispatchToProps = dispatch => {
-    return{
-      onChange: newtxt => {
-        dispatch(updateEdit(newtxt))
-      }
-    }
-  }
-  
-  const prevLink = connect(mapStateToProps, mapDispatchToProps)(Previewer);
-  
-  const Container = () => (
-    <div id = "main-container">
-      <Editor />
-      <Previewer />
-    </div>
-  )
-
-  export default Container
+export const PreviewCont = connect(mapStateToProps, mapDispatchToProps)(Previewer)
+export const EditCont = connect(mapStateToProps, mapDispatchToProps)(Editor)

@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Container from './Markdown';
+import {EditCont, PreviewCont} from './Markdown';
+import {mdReducer} from './Markdown';
+import {createStore} from 'redux'
+import {Provider} from "react-redux"
 import * as serviceWorker from './serviceWorker';
+
+const store = createStore(mdReducer);
 
 ReactDOM.render(
   <React.StrictMode>
-      <Container />
+    <Provider store={store}>
+      <EditCont />
+      <PreviewCont />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
