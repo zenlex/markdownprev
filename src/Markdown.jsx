@@ -1,6 +1,6 @@
 import React from 'react';
 import './Markdown.css';
-
+import{ createStore } from 'redux'
 import marked from 'marked'
 import DOMPurify from 'dompurify'
 import {connect} from 'react-redux'
@@ -10,29 +10,30 @@ import {connect} from 'react-redux'
  * editortxt - the value of the user input text area
  ***************************************************/
 
-//create action generator(s)
-const UPDATE_EDIT = 'UPDATE_EDIT';
-
-function updateEdit (text){
-  return{
-    type:UPDATE_EDIT,
-    rawtxt:text,
-    markdown: parseMd(text)
-  }
-}
-
-//basic function for converting rawtxt to sanitized markdown
-const parseMd = (data) => {
-  var parsed = marked(data)
+ //basic function for converting rawtxt to sanitized markdown
+const parseMd = (text) => {
+  var parsed = marked(text)
     //console.log(`Parsed rawtxt ${rawtxt} to ${parsed}`)
   var clean = DOMPurify.sanitize(parsed)  
     //console.log(`Sanitized HTML Result: ${clean}`)
     return clean;
-  
+}
+
+//create action generator(s)
+const UPDATE_TXT = 'UPDATE_TXT';
+
+function updateTxt (editorVal){
+  return{
+    type:UPDATE_TXT,
+    payload:{
+      rawtxt: editorVal,
+      markdown: parseMd(editorVal)
+    }
+  }
 }
 
 //create reducer function
-const DEFAULT_EDITOR = 'bloopy';
+const DEFAULT_EDITOR = '**Loren Ipsum**';
 const DEFAULT_MD = parseMd(DEFAULT_EDITOR);
 const initialState = {
   rawtxt: DEFAULT_EDITOR,
@@ -40,18 +41,27 @@ const initialState = {
 }
 
 export function mdReducer(state = initialState, action){
-  //simply maps input text to both fields in state (see notes on REDUX section above)
-    console.log(`Calling MarkDownPrev reducer with action type= ${action.type}`)
     switch (action.type){
-      case UPDATE_EDIT:
-        return Object.assign({}, state, {rawtxt:action.rawtxt, markdown:action.markdown})
+      case UPDATE_TXT:
+        return Object.assign({}, state, {rawtxt:action.payload.rawtxt, markdown:action.payload.markdown})
       default: 
         return state
     }
 }
 
+const store = createStore(mdReducer)
+//log the initial state
+console.log(store.getState())
 
+//Every time the state changes, log it
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
+//test dispatches
+store.dispatch(updateTxt('FlurgetyFlippity'))
+store.dispatch(updateTxt('wokka wokka'))
+
+//stop listening to state updates
+unsubscribe()
 /**************REACT UI****************
  * Following structure of state, 3 basic components
  * 1)The text area/user input which onChange passes it's updated value to Redux Store (editor)
@@ -59,12 +69,12 @@ export function mdReducer(state = initialState, action){
  * 3)Container which subscribes to store and on state change, sends new state as props to previewer
  * NOTE: text is parsed using Marked.js library and then sanitized using DOMPurify to avoid dangerous HTML
  ***************************************/
-
+/*
  //Editor is a text area (id= 'editor') whose props are simply the value of the user input
- export const Editor = ({onChange}) => (
+ export const Editor = props => (
     <div className = 'wrapper'>
       <h1>Editor:</h1>
-      <textarea id = 'editor' onChange={onChange} />
+      <textarea id = 'editor' onChange={props.onChange} />
     </div>
   )
  
@@ -77,18 +87,6 @@ export function mdReducer(state = initialState, action){
       </div>
     </div>
   )
+*/
 
-const mapStateToProps = state =>{
-  return{
-    markdown: state.markdown
-  };
-}
 
-const mapDispatchToProps = dispatch => {
-  return{
-    onChange: text => dispatch(updateEdit(text))
-  }
-}
-
-export const PreviewCont = connect(mapStateToProps, mapDispatchToProps)(Previewer)
-export const EditCont = connect(mapStateToProps, mapDispatchToProps)(Editor)
