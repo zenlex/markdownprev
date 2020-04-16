@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
  
 //Previewer is a container div (id = 'preview') which contains resulting markdown->HTML
-const MdView = props => (
-    <div className = 'wrapper'>
-     <h1>Markdown:</h1>
-     <div id = 'preview'>
-       <script>
-        document.getElementById('preview').innerHTML = {props.markdown}
-       </script>
-     </div>
-   </div>
- )
+function MdView(props) {
 
-export default MdView
+  useEffect(() => {
+    document.getElementById('preview').innerHTML = props.markdown
+  });
+
+  return(
+    <div className = 'wrapper'>
+      <h1>Markdown:</h1>
+        <div id = 'preview' />
+    </div>
+  )
+
+};
+
+export default MdView;

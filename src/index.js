@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import mdReducer from './reducers/mdReducer'
 import Editor from './containers/editor'
 import Preview from './containers/preview'
+
 const store = createStore(mdReducer);
 
 ReactDOM.render(

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { updateTxt } from '../actions/actions';
 import Editorview from '../components/editorview';
 
-const Editor = props => {
+const Editor = (props) => {
     return(
-        <Editorview value={props.rawtxt}/>
+        <Editorview rawtxt={props.rawtxt} onChange={props.onChange}/>
     )
 }
 
@@ -17,8 +17,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onChange: rawtxt => {
-        dispatch(updateTxt(rawtxt));
+        onChange: event => {
+        dispatch(updateTxt(event.target.value));
         }
     }
 }

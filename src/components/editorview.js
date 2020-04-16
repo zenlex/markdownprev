@@ -4,7 +4,7 @@
 const Editorview = props => (
     <div className = 'wrapper'>
       <h1>Editor:</h1>
-      <textarea id = 'editor' onChange={props.onChange} />
+      <textarea id = 'editor' value={props.rawtxt} onChange={props.onChange} />
     </div>
   )
 

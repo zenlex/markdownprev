@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import MdView from '../components/mdview';
 const Preview = props => {
     return(
-        <MdView />
+        <MdView markdown={props.markdown}/>
     )
 }
 
