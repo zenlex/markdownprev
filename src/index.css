@@ -26,7 +26,7 @@ pre {
 
 #header{
   display:block;
-  height:40px;
+  height:20px;
   width:100%;
   text-align:center;
   font-family:'Press Start 2p', 'Open Sans', monospace;
@@ -99,6 +99,10 @@ img[src*="#thumbsup"] {
   #editor{
     height: 25em;
     font-size: 1.25em;
+  }
+
+  #header{
+    font-size:40px;
   }
 }
 
