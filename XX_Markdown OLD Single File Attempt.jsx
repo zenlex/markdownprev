@@ -3,7 +3,6 @@ import './Markdown.css';
 import{ createStore } from 'redux'
 import marked from 'marked'
 import DOMPurify from 'dompurify'
-import {connect} from 'react-redux'
 /*****************REDUX SECTION*******************
  * Used to experimnent with very simple case of Redux/React
  * Store holds basic state with a simple text property:
@@ -69,7 +68,7 @@ unsubscribe()
  * 3)Container which subscribes to store and on state change, sends new state as props to previewer
  * NOTE: text is parsed using Marked.js library and then sanitized using DOMPurify to avoid dangerous HTML
  ***************************************/
-/*
+
  //Editor is a text area (id= 'editor') whose props are simply the value of the user input
  export const Editor = props => (
     <div className = 'wrapper'>
@@ -87,6 +86,6 @@ unsubscribe()
       </div>
     </div>
   )
-*/
+
 
 

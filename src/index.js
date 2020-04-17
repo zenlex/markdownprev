@@ -13,8 +13,13 @@ const store = createStore(mdReducer);
 ReactDOM.render(
   <React.StrictMode>
   <Provider store = {store}>
-    <Editor />
-    <Preview />
+    <div id='header'>
+      MARKDOWN PREVIEWER
+    </div>
+    <div id='container'>
+      <Editor />
+      <Preview />
+    </div>
   </Provider>
   </React.StrictMode>,
   document.getElementById('root')

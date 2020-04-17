@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Press+Start+2P&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: source-code-pro, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +10,120 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background-color:lightgray;
+  margin:5px;
+  }
+
+pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+  max-height:400px;
+  overflow:auto;
+  width: 90%;
+  padding: 5px 10px;
+  background-color:lightgray;
+}
+
+#header{
+  display:block;
+  height:40px;
+  width:100%;
+  text-align:center;
+  font-family:'Press Start 2p', 'Open Sans', monospace;
+  font-size:40px;
+  padding:20px;
+  color:white;
+  text-decoration:underline;
+  background-color:rgb(24, 39, 58)
+  
+}
+/* Master container for the whole app */
+#container{
+  background-color:rgb(112, 165, 235);
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  padding:10px;
+}
+
+hr{
+  width:90%;
+  height:3px;
+  color: black;
+  background-color: black;
+}
+/*wrapper of the editor and previewer components*/
+.wrapper {
+  font-family:'Press Start 2p', 'Open Sans', monospace;
+  width:95%;
+  padding:5px;
+  margin:10px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
+  background-color:white;
+  box-shadow:0px 0px 10px rgb(24, 39, 58);
+}
+.wrapper h1{
+  font-size:1.5em;
+  margin: 20px 0px 0px 0px;
+}
+
+/*user input text area for markdown formatted text*/
+#editor {
+  height:20em;
+  width: 90%;
+}
+
+/*div for output of markdown converted to rendered HTML*/
+#preview {
+  width:90%;
+  font-family:'Open Sans', monospace;
+  padding:10px;
+  margin:0px 5px 10px 5px;
+  text-align:left;
+}
+
+img[src*="#thumbsup"] {
+  width: 80%;
+  height: auto;
+  display:block;
+  margin:0px auto;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 1024px){
+  #editor{
+    height: 25em;
+    font-size: 1.25em;
+  }
+}
+
+@media only screen and (min-width:1366px){
+  #container{
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    height: 100%;
+    padding:5px 20px;
+  }
+
+  .wrapper{
+    height:90vh;
+    overflow:hidden;
+    justify-content:flex-start;
+  }
+  
+  #editor{
+    height:100%;
+    margin:0 0 15px;
+  }
+
+  #preview{
+    height: 90%;
+    overflow:auto;
+  }
 }
