@@ -25,12 +25,15 @@ pre {
 }
 
 #header{
-  display:block;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   height:20px;
   width:100%;
-  text-align:center;
   font-family:'Press Start 2p', 'Open Sans', monospace;
-  font-size:40px;
+  font-size:1em;
+  white-space: nowrap;
+  overflow:hidden;
   padding:20px;
   color:white;
   text-decoration:underline;
@@ -44,6 +47,7 @@ pre {
   flex-direction:column;
   align-items: center;
   padding:10px;
+  width:100%;
 }
 
 hr{
@@ -102,7 +106,8 @@ img[src*="#thumbsup"] {
   }
 
   #header{
-    font-size:40px;
+    height:40px;
+    font-size:30px;
   }
 }
 
@@ -124,6 +129,7 @@ img[src*="#thumbsup"] {
   #editor{
     height:100%;
     margin:0 0 15px;
+    overflow:auto;
   }
 
   #preview{
