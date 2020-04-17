@@ -11,7 +11,7 @@ function MdView(props) {
 
   return(
     <div className = 'wrapper'>
-      <h1>Preview:</h1>
+      <h2>Preview:</h2>
       <hr />
         <div id = 'preview' />
     </div>

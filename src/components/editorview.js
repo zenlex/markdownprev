@@ -5,7 +5,7 @@
  //onChange ultimately calls the UPDATE_TXT type action generator which updates rawtxt and markdown in store state
 const Editorview = props => (
     <div className = 'wrapper'>
-      <h1>Editor:</h1>
+      <h2>Editor:</h2>
       <hr />
       <p>Enter markdown</p>
       <textarea id = 'editor' value={props.rawtxt} onChange={props.onChange} />
