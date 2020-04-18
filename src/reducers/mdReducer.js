@@ -8,7 +8,7 @@ export const parseMd = text => {
   var clean = DOMPurify.sanitize(parsed)  
     return clean;
 }
-
+marked.setOptions({breaks:true});
 const DEFAULT_EDITOR = 
 `
 [Markdown Basic Syntax Guide](https://www.markdownguide.org/basic-syntax/)  
