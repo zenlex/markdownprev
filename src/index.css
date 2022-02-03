@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Press+Start+2P&display=swap");
-
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
 body {
-  margin: 0;
   font-family: source-code-pro, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,30 +27,37 @@ pre {
   background-color:lightgray;
 }
 
+section {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+p {
+  margin:5px;
+}
 #header{
   display:flex;
   justify-content:center;
   align-items:center;
-  height:20px;
   width:100%;
   font-family:'Press Start 2p', 'Open Sans', monospace;
   font-size:1em;
   white-space: nowrap;
-  overflow:hidden;
   padding:20px;
   color:white;
   text-decoration:underline;
   background-color:rgb(24, 39, 58)
   
 }
-/* Master container for the whole app */
 #container{
   background-color:rgb(112, 165, 235);
   display:flex;
   flex-direction:column;
   align-items: center;
-  padding:10px;
   width:100%;
+  margin: 0 auto;
 }
 
 hr{
@@ -56,6 +66,7 @@ hr{
   color: black;
   background-color: black;
 }
+
 /*wrapper of the editor and previewer components*/
 .wrapper {
   font-family:'Press Start 2p', 'Open Sans', monospace;
@@ -71,6 +82,7 @@ hr{
   background-color:white;
   box-shadow:0px 0px 10px rgb(24, 39, 58);
 }
+
 .wrapper h2{
   font-size:1.5em;
   margin: 20px 0px 0px 0px;
@@ -100,24 +112,24 @@ img[src*="#thumbsup"] {
 }
 
 @media only screen and (min-width: 1024px){
+  section{
+    flex-direction: row;
+  }
   #editor{
     height: 25em;
     font-size: 1.25em;
   }
 
   #header{
-    height:40px;
     font-size:30px;
   }
 }
 
 @media only screen and (min-width:1200px){
   #container{
-    flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
     height: 100%;
-    padding:5px 20px;
   }
 
   .wrapper{

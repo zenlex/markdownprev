@@ -1,14 +1,13 @@
 import UPDATE_TXT from '../actions/types.js'
-//basic function for converting rawtxt to sanitized markdown
 import DOMPurify from 'dompurify'
-import marked from 'marked'
+import {marked, setOptions} from 'marked'
 import thumbsup from '../media/thumbsup.jpg'
 export const parseMd = text => {
   var parsed = marked(text)
   var clean = DOMPurify.sanitize(parsed)  
     return clean;
 }
-marked.setOptions({breaks:true});
+setOptions({breaks:true});
 const DEFAULT_EDITOR = 
 `
 [Markdown Basic Syntax Guide](https://www.markdownguide.org/basic-syntax/)  
