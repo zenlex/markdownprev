@@ -1,6 +1,6 @@
-# Markdown Previewer - 
+# Markdown Previewer
 *See Markdown render live as you type*
-### Free Code Camp Front End Development Certification
+### Free Code Camp Front End Frameworks Certification
 
 - Bootstrapped with `create-react-app`
 
